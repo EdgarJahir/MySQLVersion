@@ -1,0 +1,31 @@
+paquete com.edgar.mysqlversion;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class MySQLVersion {
+
+    public static void main (String [] args) {
+        String url = "jdbc: mysql: // localhost: 3306 / libreriadb? UseSSL = false";
+        String user = "edgar";
+        String contraseña = "12345678";
+
+        String query = "SELECT VERSION ()";
+
+        try (Connection con = DriverManager.getConnection (url, usuario, contraseña);
+                Declaración st = con.createStatement ();
+                ResultSet rs = st.executeQuery (consulta)) {
+            if (rs.next ()) {
+                System.out.println (rs.getString (1));
+            }
+        } captura (SQLException ex) {
+            Logger lgr = Logger.getLogger (MySQLVersion.class.getName ());
+            lgr.log (Level.SEVERE, ex.getMessage (), ex);
+        }
+    }
+}
